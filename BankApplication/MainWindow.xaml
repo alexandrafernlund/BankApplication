@@ -1,0 +1,177 @@
+﻿<Window x:Class="BankApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankApplication"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        ResizeMode="CanMinimize">
+    <Grid>
+        <Button Content="Lägg till konto"
+            Click="AddAccount_Click"
+            Height="30" Width="180" 
+            Margin="74,150,546,234"/>
+
+        <Button Content="Ny överföring"
+            Click="NewTransaction_Click"
+            Height="30" Width="180"  
+            Margin="74,202,546,202"/>
+
+        <ComboBox Width="200" 
+              Margin="310,168,310,261"
+              x:Name="AccountCombobox">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="0,0,5,0"/>
+                        <TextBlock Text="{Binding Balance}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <DataGrid Width="200" MaxHeight="100" 
+              Margin="310,193,310,235">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Från" Width="35" />
+                <DataGridTextColumn Header="Till" Width="25" />
+                <DataGridTextColumn Header="Datum" Width="45" />
+                <DataGridTextColumn Header="Summa" Width="50" />
+                <DataGridTextColumn Header="Balans" Width="50" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Popup x:Name="NewAccountPopup" 
+           IsOpen="False" Placement="Center">
+            <Border Background="White" 
+                BorderThickness="0.5" 
+                Padding="10" 
+                Height="200" Width="300">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Namn: "
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Margin="0, 10, 0, 0"/>
+                        <TextBlock Text="Balans: "
+                               Grid.Column="0"
+                               Grid.Row="1"
+                               Margin="0, 10, 0, 0"/>
+                        <TextBox Grid.Column="1"
+                             Grid.Row="0"
+                             Margin="0, 10, 0, 0"/>
+                        <TextBox Grid.Column="1"
+                             Grid.Row="1"
+                             Margin="0, 10, 0, 0"/>
+                        <Button Content="OK"
+                            Grid.Column="0"
+                            Grid.Row="3"
+                            Margin="0, 20, 10, 0"/>
+                        <Button Content="Cancel"
+                            Grid.Column="1"
+                            Grid.Row="3"
+                            Margin="0, 20, 0, 0"
+                            Click="ClosePopup_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+        <Popup x:Name="NewTransactionPopup" 
+   IsOpen="False" Placement="Center">
+            <Border Background="White" 
+        BorderThickness="0.5" 
+        Padding="10" 
+        Height="270" Width="300">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Från: "
+                                Grid.Column="0"
+                                Grid.Row="0"
+                                Margin="0, 10, 0, 0"/>
+                        <ComboBox Grid.Column="0"
+                              Grid.Row="1"
+                              Margin="0, 10, 0, 0"
+                              x:Name="FromCombobox">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Balance}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                        </ComboBox>
+                        <TextBlock Text="Till: "
+                               Grid.Column="0"
+                               Grid.Row="2"
+                               Margin="0, 10, 0, 0"/>
+                        <ComboBox Grid.Column="0"
+                              Grid.Row="3"
+                              Margin="0, 10, 0, 0"
+                              x:Name="ToCombobox">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Balance}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+                        </ComboBox>
+                        <TextBlock Text="Amount: "
+                               Grid.Column="0"
+                               Grid.Row="4"
+                               Margin="0, 10, 0, 0"
+                               x:Name="AmountTextbox"/>
+                        <TextBox Grid.Column="0"
+                              Grid.Row="5"
+                              Margin="0, 10, 0, 0"/>
+                        <Button Content="OK"
+                            Grid.Column="0"
+                            Grid.Row="7"
+                            Margin="0, 20, 10, 0"
+                            Click="OKButton_Click"/>
+                        <Button Content="Cancel"
+                            Grid.Column="1"
+                            Grid.Row="7"
+                            Margin="0, 20, 0, 0"
+                            Click="ClosePopup_Click"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Popup>
+
+    </Grid>
+</Window>
