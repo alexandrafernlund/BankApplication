@@ -18,9 +18,10 @@
             Height="30" Width="180"  
             Margin="74,202,546,202"/>
 
-        <ComboBox Width="200" 
-              Margin="310,168,310,261"
-              x:Name="AccountCombobox">
+        <ComboBox 
+              Margin="310,168,247,261"
+              x:Name="AccountCombobox"
+              Width="324">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -31,15 +32,10 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <DataGrid Width="200" MaxHeight="100" 
-              Margin="310,193,310,235">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Från" Width="35" />
-                <DataGridTextColumn Header="Till" Width="25" />
-                <DataGridTextColumn Header="Datum" Width="45" />
-                <DataGridTextColumn Header="Summa" Width="50" />
-                <DataGridTextColumn Header="Balans" Width="50" />
-            </DataGrid.Columns>
+        <DataGrid MaxHeight="100" 
+                  Width="324" 
+                  x:Name="TransactionGrid" 
+                  Margin="310,14,247,-14">
         </DataGrid>
 
         <Popup x:Name="NewAccountPopup" 
@@ -153,16 +149,17 @@
                         <TextBlock Text="Amount: "
                                Grid.Column="0"
                                Grid.Row="4"
-                               Margin="0, 10, 0, 0"
-                               x:Name="AmountTextbox"/>
+                               Margin="0, 10, 0, 0"/>
                         <TextBox Grid.Column="0"
                               Grid.Row="5"
-                              Margin="0, 10, 0, 0"/>
+                              Margin="0, 10, 0, 0"
+                              x:Name="AmountTextbox"
+                              Text="{Binding AmountText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button Content="OK"
                             Grid.Column="0"
                             Grid.Row="7"
                             Margin="0, 20, 10, 0"
-                            Click="OKButton_Click"/>
+                            Click="TransferOKButton_Click"/>
                         <Button Content="Cancel"
                             Grid.Column="1"
                             Grid.Row="7"
