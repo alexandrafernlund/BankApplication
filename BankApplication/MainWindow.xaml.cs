@@ -109,19 +109,16 @@ namespace BankApplication
                 return;
             }
 
-            // Perform the transaction
             PerformTransaction(fromAccount, toAccount, amount);
-
-            // Close the popup
             NewTransactionPopup.IsOpen = false;
 
             // Reset input fields and update ComboBox data
-            AmountTextbox.Text = ""; // Clear transaction amount
-            FromCombobox.SelectedItem = null; // Reset source account selection
-            ToCombobox.SelectedItem = null; // Reset destination account selection
-            AccountCombobox.ItemsSource = null; // Clear ComboBox data
-            ToCombobox.ItemsSource = null; // Clear ComboBox data
-            FromCombobox.ItemsSource = null; // Clear ComboBox data
+            AmountTextbox.Text = ""; 
+            FromCombobox.SelectedItem = null; 
+            ToCombobox.SelectedItem = null;
+            AccountCombobox.ItemsSource = null; 
+            ToCombobox.ItemsSource = null; 
+            FromCombobox.ItemsSource = null; 
 
             // Reassign ComboBox data to reflect updated account balances
             AccountCombobox.ItemsSource = accounts;
@@ -134,10 +131,7 @@ namespace BankApplication
 
         private void PerformTransaction(Account fromAccount, Account toAccount, decimal transactionAmount)
         {
-            // Deduct from source account
             fromAccount.Balance -= transactionAmount;
-
-            // Add to destination account
             toAccount.Balance += transactionAmount;
 
             // Create transaction record
@@ -158,6 +152,7 @@ namespace BankApplication
 
         private void UpdateTransactionGrid()
         {
+            transactions.Reverse();
             TransactionGrid.ItemsSource = null;
             TransactionGrid.ItemsSource = transactions;
         }
