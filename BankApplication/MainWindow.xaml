@@ -7,6 +7,43 @@
         mc:Ignorable="d"
         Title="MainWindow"
         ResizeMode="CanMinimize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+        <Style TargetType="DataGrid" x:Key="CustomDataGridStyle">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="AlternatingRowBackground" Value="WhiteSmoke" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Thin" />
+            <Setter Property="GridLinesVisibility" Value="All" />
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="BorderThickness" Value="0.5" />
+            <Setter Property="FontWeight" Value="Thin" />
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="LightGray" />
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="15" />
+        </Style>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Button Content="Lägg till konto"
             Click="AddAccount_Click"
@@ -37,7 +74,8 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <DataGrid MaxHeight="100" 
+        <DataGrid Style="{StaticResource CustomDataGridStyle}"
+            MaxHeight="100" 
                   Width="324" 
                   x:Name="TransactionGrid" 
                   Margin="310,14,247,-14"
@@ -73,14 +111,19 @@
                                Margin="0, 10, 0, 0"/>
                         <TextBox Grid.Column="1"
                              Grid.Row="0"
-                             Margin="0, 10, 0, 0"/>
+                             Margin="0, 10, 0, 0"
+                             x:Name="AddAccountNameTextbox"
+                             Text="{Binding AmountText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <TextBox Grid.Column="1"
                              Grid.Row="1"
-                             Margin="0, 10, 0, 0"/>
+                             Margin="0, 10, 0, 0"
+                             x:Name="AddAccountBalanceTextbox"
+                             Text="{Binding AmountText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button Content="OK"
                             Grid.Column="0"
                             Grid.Row="3"
-                            Margin="0, 20, 10, 0"/>
+                            Margin="0, 20, 10, 0"
+                            Click="AddAccountOKButton_Click"/>
                         <Button Content="Cancel"
                             Grid.Column="1"
                             Grid.Row="3"

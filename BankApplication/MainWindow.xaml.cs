@@ -159,6 +159,31 @@ namespace BankApplication
             NewAccountPopup.IsOpen = true;
         }
 
+        public void AddAccountOKButton_Click(object sender, RoutedEventArgs e)
+        {
+            string accountName = AddAccountNameTextbox.Text;
+
+            decimal initialBalance;
+            if (!decimal.TryParse(AddAccountBalanceTextbox.Text, out initialBalance))
+            {
+                MessageBox.Show("Please enter a valid initial balance.");
+                return;
+            }
+
+            // Create a new account instance
+            Account newAccount = new Account(accountName, initialBalance);
+
+            accounts.Add(newAccount);
+
+            // Refresh the ComboBox to reflect the changes
+            AccountCombobox.ItemsSource = null;
+            AccountCombobox.ItemsSource = accounts;
+
+            NewAccountPopup.IsOpen = false;
+
+            MessageBox.Show("New account added successfully.");
+        }
+
         public void NewTransaction_Click(object sender, RoutedEventArgs e)
         {
             NewTransactionPopup.IsOpen = true;
