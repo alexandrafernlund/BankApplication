@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BankApplication
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public MainWindow()
+        {
+            InitializeComponent();
+            DummyData dummyData = new DummyData();
+            accounts = dummyData.GetDummyData();
+            transactions = new List<Transaction>();
+
+            AccountCombobox.ItemsSource = accounts;
+            ToCombobox.ItemsSource = accounts;
+            FromCombobox.ItemsSource = accounts;
+        }
 
         private string amountText;
         public string AmountText
@@ -21,8 +33,6 @@ namespace BankApplication
                 }
             }
         }
-
-        // Implement INotifyPropertyChanged interface
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -31,18 +41,6 @@ namespace BankApplication
 
         private List<Account> accounts;
         private List<Transaction> transactions;
-
-        public MainWindow()
-        {
-            InitializeComponent();
-            DummyData dummyData = new DummyData();
-            accounts = dummyData.GetDummyData();
-            transactions = new List<Transaction>();
-
-            AccountCombobox.ItemsSource = accounts;
-            ToCombobox.ItemsSource = accounts;
-            FromCombobox.ItemsSource = accounts;
-        }
 
         public class Account
         {
@@ -149,7 +147,6 @@ namespace BankApplication
             UpdateTransactionGrid();
         }
 
-
         private void UpdateTransactionGrid()
         {
             transactions.Reverse();
@@ -171,6 +168,27 @@ namespace BankApplication
         {
             NewAccountPopup.IsOpen = false;
             NewTransactionPopup.IsOpen = false;
+        }
+
+        public void LogInButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = IDTextbox.Text;
+            string password = PasswordBox.Password;
+
+            // Perform authentication (example: check against hardcoded credentials)
+            if (username == "admin" && password == "password")
+            {
+                TransactionGrid.Visibility = Visibility.Visible;
+                AccountCombobox.Visibility = Visibility.Visible;
+                NewTransactionButton.Visibility = Visibility.Visible;
+                AddAccountButton.Visibility = Visibility.Visible;
+
+                LogInStackpanel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password. Please try again.");
+            }
         }
     }
 }
